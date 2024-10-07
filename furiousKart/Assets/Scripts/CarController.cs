@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,10 +16,16 @@ public class CarController : MonoBehaviour
     //Two float variables to hold keyboard input values between -1 and 1
     public float throttleInput;
     public float steeringInput;
+    public float brakeInput;
 
 
     //Variable controlling how strong much power the engine will provide to the rear wheels.
     public float engineStrength;
+    public float brakeStrength;
+
+    public float slipAngle;
+
+
 
     private float speed;
 
@@ -47,15 +54,40 @@ public class CarController : MonoBehaviour
     }
 
 
-    void CheckInput()
-        
+    void CheckInput()   
     {
-
         //checks for keyboard inputs between -1 and 1
         throttleInput = Input.GetAxis("Vertical"); // checks W and S or Up arrow and Down arrow
         steeringInput = Input.GetAxis("Horizontal");// checks A or D or right arrow and left arrow
+
+        //Drift angle stuff
+        slipAngle = Vector3.SignedAngle(transform.forward, rb.velocity, Vector3.up);
+
+        if(slipAngle < 120f)
+        {
+            if (throttleInput < 0) { }
+
+
+            brakeInput = throttleInput;
+            throttleInput = 0;
+            
+
+        }
+
     }
 
+
+    void applyBrake()
+    {
+        colliders.FRwheel.brakeTorque = brakeInput * brakeStrength * 0.7f;
+
+        colliders.FLwheel.brakeTorque = brakeInput * brakeStrength * 0.7f;
+       
+        colliders.RRwheel.brakeTorque = brakeInput * brakeStrength * 0.3f;
+
+        colliders.RLwheel.brakeTorque = brakeInput * brakeStrength * 0.3f;
+
+    }
 
     void applyPower() 
     {
@@ -63,6 +95,7 @@ public class CarController : MonoBehaviour
         //value of motorTorque updated for each collider when a throttleInput is detected
         //times by the constant engineStrength variable 
         //allowing the rearwheels to get power and move the vehicle
+
         colliders.RLwheel.motorTorque = engineStrength * throttleInput;
         colliders.RRwheel.motorTorque = engineStrength * throttleInput;
     }
@@ -75,11 +108,13 @@ public class CarController : MonoBehaviour
         //steeringcurve.evaluate(speed) will dynamically adjust steering sensitivity
         //based ont the speed of the rigidbody.
         //as steeringInput is a range from -1 and 1, the angles will adjust for the ranges between total left and right.
+
         float steeringAngle = steeringInput * steeringCurve.Evaluate(speed);
         
         //WheelCollider has the property of steerAngle
         //steerAngle for each collider on the front two wheels is set to the calculated steeringAngle 
         //when a steeringInput is detected
+
         colliders.FRwheel.steerAngle = steeringAngle;
         colliders.FLwheel.steerAngle = steeringAngle;
     }
