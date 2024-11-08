@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638633243458092467
-    m_Hash: 3190872083
+      ticks: 638635386208670377
+    m_Hash: 3219194938
   m_LockFileStatus:
     m_FilePath: C:/Users/akash/Documents/GitHub/furiousKart/furiousKart/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638633243458102502
-    m_Hash: 3783707878
+      ticks: 638635386208770994
+    m_Hash: 3766408702
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -118,11 +118,13 @@ m_ResolvedPackages:
     - 2.4.3
     - 2.4.4
     - 2.5.1
+    - 2.5.2
     compatible:
     - 2.3.1
     - 2.4.3
     - 2.4.4
     - 2.5.1
+    - 2.5.2
     recommended: 2.3.1
     deprecated: []
   dependencies: []
