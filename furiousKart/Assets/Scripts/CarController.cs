@@ -27,15 +27,18 @@ public class CarController : MonoBehaviour
 
 
     //Variable controlling how strong much power the engine will provide to the rear wheels.
-    public float engineStrength;
+    
+    public float engineStrength = 1200f;
     public float brakeStrength;
 
+
+    public float health = 200f;
 
     //generated values
     public float slipAngle;
     public float movingDirection;
 
-    private float velocityV;
+   
     private float speed;
 
     WheelFrictionCurve wfcSlip = new WheelFrictionCurve();
@@ -140,7 +143,7 @@ public class CarController : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(movingDirection);
+        //Debug.Log(movingDirection);
 
 
         speed = rb.velocity.magnitude;
