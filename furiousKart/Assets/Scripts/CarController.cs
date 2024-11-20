@@ -32,7 +32,7 @@ public class CarController : MonoBehaviour
     public float brakeStrength;
 
 
-    public float health = 200f;
+   
 
     //generated values
     public float slipAngle;
@@ -317,7 +317,7 @@ public class CarController : MonoBehaviour
         colliders.RRwheel.GetGroundHit(out wheelHits[2]);
         colliders.RLwheel.GetGroundHit(out wheelHits[3]);
 
-        float slipAllowance = 0.5f;
+        float slipAllowance = 1.5f;
 
         if ((Mathf.Abs(wheelHits[0].sidewaysSlip) + Mathf.Abs(wheelHits[0].forwardSlip) > slipAllowance))
         {
