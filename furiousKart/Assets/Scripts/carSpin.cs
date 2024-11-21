@@ -8,6 +8,6 @@ public class carSpin : MonoBehaviour
     void Update()
     {
         //Rotation every frame in the Y direction
-        this.transform.Rotate(0,2,0);
+        this.transform.Rotate(0,0.5f,0);
     }
 }

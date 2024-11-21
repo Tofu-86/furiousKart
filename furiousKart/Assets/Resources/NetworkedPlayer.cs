@@ -13,6 +13,7 @@ public class NetworkedPLayer : MonoBehaviour
     //public GameObject playerNamePrefab;
     public Rigidbody rb;
     public Renderer kartMesh;
+    public Camera cam;
 
 
 

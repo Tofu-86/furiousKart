@@ -15,6 +15,11 @@ public class gameManager : MonoBehaviourPunCallbacks
     public Text feedbackText;
     string gameVersion = "1";
 
+
+
+
+
+
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -83,7 +88,11 @@ public class gameManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         feedbackText.text += "\nJoined Room with" + PhotonNetwork.CurrentRoom.PlayerCount + "Players.";
+        PhotonNetwork.CurrentRoom.IsOpen = true;
+        PhotonNetwork.CurrentRoom.IsVisible = true;
+
         PhotonNetwork.LoadLevel("Track1_Grassy");
+
         }
 
 
