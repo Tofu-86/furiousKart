@@ -63,8 +63,8 @@ public class PowerUp : MonoBehaviour
         yield return new WaitForSeconds(WaitSeconds); /* Makes the coroutine wait the declared time of WaitSeconds,
                                                        * execution is paused at this point of code but everything else will continue to run. */
 
-
-        playerCar.GetComponent<CarController>().engineStrength /= multiplier; // reversing multiplier effect.
+        GameObject.FindGameObjectWithTag("GreenCar").GetComponent<CarController>().engineStrength /= multiplier;
+        //playerCar.GetComponent<CarController>().engineStrength /= multiplier; // reversing multiplier effect.
         Destroy(gameObject); // make object disapear once picked up.
     }
 }

@@ -23,11 +23,31 @@ public class SpawnCars : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         playerKart = PlayerPrefs.GetInt("PlayerKart");
         int randomStartPos = Random.Range(0, spawnPoint.Length);
         Vector3 startPos = spawnPoint[randomStartPos].position;
         Quaternion startRot = spawnPoint[randomStartPos].rotation;
 
+
+
+
+        startPos = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
+        startRot = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+        }
+        else
+        {
+            pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+        }
+
+
+
+
+        /*
         if (PhotonNetwork.IsConnected) 
         {
             startPos = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
@@ -44,9 +64,10 @@ public class SpawnCars : MonoBehaviourPunCallbacks
             if (PhotonNetwork.IsMasterClient)
             {
                 
-            }        
-        }
-        else
+            }     
+        */
+        //}
+/*        else
         {
             pKart = Instantiate(vehicleFabs[playerKart]);
             pKart.transform.position = startPos;
@@ -54,7 +75,7 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
 
         }
-
+*/
         Camera kartCamera = pKart.GetComponentInChildren<Camera>();
         pKart.GetComponent<CarController>().enabled = true;
         pKart.GetComponentInChildren<Camera>().enabled = true;

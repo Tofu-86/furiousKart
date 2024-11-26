@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - CameraController
     - CarController
     - NetworkedPLayer
+    - PowerUp
     - SpawnCars
     - carSpin
     - chooseCar
@@ -29,7 +30,7 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
     PhotonUnityNetworking.Editor.dll:
-    - Photon.Pun.ServerSettingsInspector
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonRigidbodyView
     - Photon.Pun.PhotonTransformView
@@ -160,36 +161,40 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1670}
     - Class: 114
-      Script: {instanceID: 2712}
+      Script: {instanceID: 2714}
     - Class: 114
-      Script: {instanceID: 2918}
+      Script: {instanceID: 2920}
     - Class: 114
-      Script: {instanceID: 3220}
+      Script: {instanceID: 2930}
     - Class: 114
-      Script: {instanceID: 5192}
+      Script: {instanceID: 3224}
     - Class: 114
-      Script: {instanceID: 5756}
+      Script: {instanceID: 5200}
     - Class: 114
-      Script: {instanceID: 5908}
+      Script: {instanceID: 5768}
     - Class: 114
-      Script: {instanceID: 6224}
+      Script: {instanceID: 5924}
     - Class: 114
-      Script: {instanceID: 9102}
+      Script: {instanceID: 6242}
     - Class: 114
-      Script: {instanceID: 9210}
+      Script: {instanceID: 8870}
     - Class: 114
-      Script: {instanceID: 9518}
+      Script: {instanceID: 8970}
     - Class: 114
-      Script: {instanceID: 9546}
+      Script: {instanceID: 9266}
     - Class: 114
-      Script: {instanceID: 9598}
+      Script: {instanceID: 9294}
     - Class: 114
-      Script: {instanceID: 9706}
+      Script: {instanceID: 9346}
     - Class: 114
-      Script: {instanceID: 9866}
+      Script: {instanceID: 9446}
+    - Class: 114
+      Script: {instanceID: 9600}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
+      Script: {instanceID: 0}
+    - Class: 135
       Script: {instanceID: 0}
     - Class: 146
       Script: {instanceID: 0}
@@ -261,69 +266,69 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2404}
     - Class: 114
-      Script: {instanceID: 2712}
+      Script: {instanceID: 2714}
     - Class: 114
-      Script: {instanceID: 2918}
+      Script: {instanceID: 2920}
     - Class: 114
-      Script: {instanceID: 2966}
+      Script: {instanceID: 2970}
     - Class: 114
-      Script: {instanceID: 3220}
+      Script: {instanceID: 3224}
     - Class: 114
-      Script: {instanceID: 4224}
+      Script: {instanceID: 4232}
     - Class: 114
-      Script: {instanceID: 4480}
+      Script: {instanceID: 4488}
     - Class: 114
-      Script: {instanceID: 5120}
+      Script: {instanceID: 5128}
     - Class: 114
-      Script: {instanceID: 5192}
+      Script: {instanceID: 5200}
     - Class: 114
-      Script: {instanceID: 5444}
+      Script: {instanceID: 5456}
     - Class: 114
-      Script: {instanceID: 5756}
+      Script: {instanceID: 5768}
     - Class: 114
-      Script: {instanceID: 5908}
+      Script: {instanceID: 5924}
     - Class: 114
-      Script: {instanceID: 6224}
+      Script: {instanceID: 6242}
     - Class: 114
-      Script: {instanceID: 8994}
+      Script: {instanceID: 8770}
     - Class: 114
-      Script: {instanceID: 9002}
+      Script: {instanceID: 8778}
     - Class: 114
-      Script: {instanceID: 9102}
+      Script: {instanceID: 8870}
     - Class: 114
-      Script: {instanceID: 9146}
+      Script: {instanceID: 8910}
     - Class: 114
-      Script: {instanceID: 9206}
+      Script: {instanceID: 8966}
     - Class: 114
-      Script: {instanceID: 9210}
+      Script: {instanceID: 8970}
     - Class: 114
-      Script: {instanceID: 9286}
+      Script: {instanceID: 9046}
     - Class: 114
-      Script: {instanceID: 9454}
+      Script: {instanceID: 9202}
     - Class: 114
-      Script: {instanceID: 9466}
+      Script: {instanceID: 9214}
     - Class: 114
-      Script: {instanceID: 9518}
+      Script: {instanceID: 9266}
     - Class: 114
-      Script: {instanceID: 9526}
+      Script: {instanceID: 9274}
     - Class: 114
-      Script: {instanceID: 9546}
+      Script: {instanceID: 9294}
     - Class: 114
-      Script: {instanceID: 9598}
+      Script: {instanceID: 9346}
     - Class: 114
-      Script: {instanceID: 9666}
+      Script: {instanceID: 9410}
     - Class: 114
-      Script: {instanceID: 9682}
+      Script: {instanceID: 9426}
     - Class: 114
-      Script: {instanceID: 9706}
+      Script: {instanceID: 9446}
     - Class: 114
-      Script: {instanceID: 9814}
+      Script: {instanceID: 9548}
     - Class: 114
-      Script: {instanceID: 9874}
+      Script: {instanceID: 9608}
     - Class: 114
-      Script: {instanceID: 9886}
+      Script: {instanceID: 9620}
     - Class: 114
-      Script: {instanceID: 9898}
+      Script: {instanceID: 9632}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -479,6 +484,12 @@ ScriptsOnlyBuild:
     className: UnityOnBecameVisibleMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 161a62664f39fa8e8e5d0fe1aeca49fa
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: DecalDestroyer
+  - hash:
+      serializedVersion: 2
       Hash: e987953190eb4c12cf19df790566dc2c
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.EventSystems
@@ -537,6 +548,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: GraphicRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: c609aa3c03ea5dd18d2b86be9209a4c0
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: PowerUp
   - hash:
       serializedVersion: 2
       Hash: 3b5263a98bcc71d9a9d1d78a31b34ced
@@ -953,6 +970,18 @@ ScriptsOnlyBuild:
     className: DepthOfField
   - hash:
       serializedVersion: 2
+      Hash: 9a2162ebe7303f13b89ba4fcb5e96459
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: ExtinguishableFire
+  - hash:
+      serializedVersion: 2
+      Hash: f41afcb9a4025cf91d39ebcd0074d37a
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: ParticleMenu
+  - hash:
+      serializedVersion: 2
       Hash: d82086405f46de14829f6b4bcbdd8fc9
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1005,6 +1034,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: AspectRatioFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 8e867e9b6da8d6e002a3b7061e5f4ea2
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Readme
   - hash:
       serializedVersion: 2
       Hash: 9637dcdf3068a91dfe653e61bb82f13d
@@ -1073,6 +1108,12 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
+      Hash: b4f05a593336f724236cdb4fdb4d61cd
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: ParticleCollision
+  - hash:
+      serializedVersion: 2
       Hash: 17142b03663387290480c82303274c02
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1095,6 +1136,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnCollisionExitMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: ecb82fa069f447e07427a2f3b70a7ccd
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: GunShoot
   - hash:
       serializedVersion: 2
       Hash: d2ecd94550edf1b56aff07b1f4e41c57
@@ -1283,6 +1330,12 @@ ScriptsOnlyBuild:
     className: UnityOnTriggerExit2DMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 89ca47cea2a1f8f83a1bac574ca8e424
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: GunAim
+  - hash:
+      serializedVersion: 2
       Hash: 8b15e35eb98fc258ec2e839df7c3c9b0
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
@@ -1349,12 +1402,6 @@ ScriptsOnlyBuild:
     className: PlayerListCell
   - hash:
       serializedVersion: 2
-      Hash: 9a2162ebe7303f13b89ba4fcb5e96459
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: ExtinguishableFire
-  - hash:
-      serializedVersion: 2
       Hash: 5f0ba524d783e2fff7d9cea3e39eec96
     assemblyName: PhotonUnityNetworking.Demos
     namespaceName: Photon.Pun.Demo.Procedural
@@ -1407,12 +1454,6 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos
     namespaceName: Photon.Pun.Demo.Cockpit
     className: RegionListCell
-  - hash:
-      serializedVersion: 2
-      Hash: ecb82fa069f447e07427a2f3b70a7ccd
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: GunShoot
   - hash:
       serializedVersion: 2
       Hash: 429e659c846601e123ebde9292440c3d
@@ -1469,12 +1510,6 @@ ScriptsOnlyBuild:
     className: SetRoomCustomPropertyUIForm
   - hash:
       serializedVersion: 2
-      Hash: c609aa3c03ea5dd18d2b86be9209a4c0
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: PowerUp
-  - hash:
-      serializedVersion: 2
       Hash: b6b150bf416164a153786ff720ac27e7
     assemblyName: PhotonUnityNetworking.Demos
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -1509,12 +1544,6 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos
     namespaceName: Photon.Pun.Demo.Cockpit.Forms
     className: UserIdUiForm
-  - hash:
-      serializedVersion: 2
-      Hash: 161a62664f39fa8e8e5d0fe1aeca49fa
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: DecalDestroyer
   - hash:
       serializedVersion: 2
       Hash: a5c9f0d2494103a7ce0ea05a2aa5c9ae
@@ -1677,12 +1706,6 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos
     namespaceName: Photon.Pun.Demo.Asteroids
     className: AsteroidsGameManager
-  - hash:
-      serializedVersion: 2
-      Hash: 89ca47cea2a1f8f83a1bac574ca8e424
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: GunAim
   - hash:
       serializedVersion: 2
       Hash: c928033142e4161a0d8482e2ac0516e1
@@ -1955,12 +1978,6 @@ ScriptsOnlyBuild:
     className: OnStartDelete
   - hash:
       serializedVersion: 2
-      Hash: f41afcb9a4025cf91d39ebcd0074d37a
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: ParticleMenu
-  - hash:
-      serializedVersion: 2
       Hash: 186f880aaa895a1fcc17a689b1755acb
     assemblyName: Assembly-CSharp
     namespaceName: Photon.Chat.Demo
@@ -2021,12 +2038,6 @@ ScriptsOnlyBuild:
     className: OnClickRpc
   - hash:
       serializedVersion: 2
-      Hash: b4f05a593336f724236cdb4fdb4d61cd
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: ParticleCollision
-  - hash:
-      serializedVersion: 2
       Hash: befeb5ccaacdad7699de81c2103c5297
     assemblyName: PhotonUnityNetworking.Demos
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -2073,12 +2084,6 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities
     namespaceName: Photon.Pun.UtilityScripts
     className: TextToggleIsOnTransition
-  - hash:
-      serializedVersion: 2
-      Hash: 8e867e9b6da8d6e002a3b7061e5f4ea2
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: Readme
   - hash:
       serializedVersion: 2
       Hash: 229c68831ce4cd71e8c6fccf7e188135
@@ -2263,4 +2268,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/start.unity
   - Assets/Scenes/Track1_Grassy.unity
-  playerPath: C:/Users/akash/Desktop/'stick it in a file in desktop'/FuriousKart.exe
+  playerPath: C:/Users/akash/Desktop/rand/FuriousKart.exe
