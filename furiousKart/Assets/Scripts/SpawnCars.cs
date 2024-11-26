@@ -36,6 +36,8 @@ public class SpawnCars : MonoBehaviourPunCallbacks
             if(NetworkedPLayer.LocalPlayerInstance == null)
             {
                 pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+                NetworkedPLayer.LocalPlayerInstance = pKart;
+
             }
 
 
@@ -77,7 +79,6 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
 
     }
-
     // Update is called once per frame
     void Update()
     {

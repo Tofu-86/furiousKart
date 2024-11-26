@@ -10049,9 +10049,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleFabs:
-  - {fileID: 3296005096807668055, guid: 4e2ed166a69d4b346bbde085c0497a77, type: 3}
-  - {fileID: 3676559729558051430, guid: 8843ed94b2b94004a9566ba6efe1dba9, type: 3}
-  - {fileID: 6205238324161417699, guid: 668096753a3f3be4fae5a28ff0b740ef, type: 3}
+  - {fileID: 6302255100972457510, guid: 00e93b85e3e319840b10edeee9ddab63, type: 3}
+  - {fileID: 3495912473202610650, guid: ae85e579613a35d47ae78649bc6639fd, type: 3}
+  - {fileID: 7603462218534005980, guid: 7545ce8071e2860418aeb8cdf54ffb0b, type: 3}
   spawnPoint:
   - {fileID: 1392968034}
   - {fileID: 1241515125}

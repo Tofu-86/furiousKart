@@ -74,6 +74,7 @@ public class gameManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         feedbackText.text += "\nFailed to join random room.";
+        Debug.Log("Failed to join random room");
         PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = this.maxPlayersPerRoom});
 
     }
