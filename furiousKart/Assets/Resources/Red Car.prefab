@@ -703,6 +703,7 @@ GameObject:
   - component: {fileID: 3630218914849538231}
   - component: {fileID: 8799517781592352616}
   - component: {fileID: 6185427694185539778}
+  - component: {fileID: 3939335410725164422}
   m_Layer: 0
   m_Name: Red Car
   m_TagString: RedCar
@@ -790,6 +791,8 @@ MonoBehaviour:
   brakeStrength: 500
   slipAngle: 0
   movingDirection: 0
+  nextCheckpoint: 0
+  currentLap: 0
   steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -859,7 +862,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6302255100972457510}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -884,6 +887,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &3939335410725164422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302255100972457510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6285e3c64bd67458c85fe87800c20b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carController: {fileID: 8183131897086430110}
 --- !u!1 &6465596576355427053
 GameObject:
   m_ObjectHideFlags: 0

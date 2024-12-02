@@ -7,7 +7,7 @@ using Photon.Realtime;
 using Photon.Pun;
 
 
-public class NetworkedPLayer : MonoBehaviour
+public class NetworkedPlayer : MonoBehaviourPunCallbacks
 {
     public static GameObject LocalPlayerInstance;
     //public GameObject playerNamePrefab;
@@ -15,7 +15,10 @@ public class NetworkedPLayer : MonoBehaviour
     public Renderer kartMesh;
     public Camera cam;
 
-
+    private void Awake()
+    {
+        LocalPlayerInstance = gameObject;
+    }
 
 
 }

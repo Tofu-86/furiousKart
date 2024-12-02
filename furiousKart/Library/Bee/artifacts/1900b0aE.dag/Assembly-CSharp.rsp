@@ -387,7 +387,7 @@
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/CarController.cs"
 "Assets/Scripts/carSpin.cs"
-"Assets/Scripts/CheckPointInteraction.cs"
+"Assets/Scripts/checkPointChecker.cs"
 "Assets/Scripts/checkpointManager.cs"
 "Assets/Scripts/checkpoints.cs"
 "Assets/Scripts/chooseCar.cs"

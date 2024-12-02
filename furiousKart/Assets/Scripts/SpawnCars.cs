@@ -14,16 +14,17 @@ public class SpawnCars : MonoBehaviourPunCallbacks
     public Transform[] spawnPoint; // creating an array for the spawn points
 
 
-    public GameObject StartRace;
+    
     GameObject pKart = null;
 
+    public GameObject startRace;
 
     int playerKart;
-
+    public float waitSec = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        // PhotonNetwork.AutomaticallySyncScene = true;
         playerKart = PlayerPrefs.GetInt("PlayerKart");
         int randomStartPos = Random.Range(0, spawnPoint.Length);
         Vector3 startPos = spawnPoint[randomStartPos].position;
@@ -31,41 +32,50 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
 
 
-
+        
         startPos = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
         startRot = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation;
 
+        StartCoroutine(delayInstantiation(startPos, startRot));
+
         if (PhotonNetwork.IsMasterClient)
         {
-            pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+
+            //StartCoroutine(delayInstantiation(startPos, startRot));
+            //pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
         }
         else
         {
-            pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+            //pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
         }
-
-
-
+        
 
         /*
-        if (PhotonNetwork.IsConnected) 
+        startRace.SetActive(false);
+
+        if (PhotonNetwork.IsConnected)
         {
             startPos = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
             startRot = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation;
 
-            if(NetworkedPLayer.LocalPlayerInstance == null)
+
+
+
+            if (NetworkedPlayer.LocalPlayerInstance == null)
             {
                 pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
-                NetworkedPLayer.LocalPlayerInstance = pKart;
+                //NetworkedPlayer.LocalPlayerInstance = pKart;
 
             }
 
 
             if (PhotonNetwork.IsMasterClient)
             {
-                
-            }     
+                startRace.SetActive(true);
+            }
+        }
         */
+
         //}
 /*        else
         {
@@ -101,6 +111,21 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
     }
     // Update is called once per frame
+
+    IEnumerator delayInstantiation(Vector3 startPos, Quaternion startRot)
+    {
+
+        yield return new WaitForSeconds(waitSec);
+        pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+        pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+        Camera kartCamera = pKart.GetComponentInChildren<Camera>();
+        pKart.GetComponent<CarController>().enabled = true;
+        pKart.GetComponentInChildren<Camera>().enabled = true;
+
+    }
+
+
+
     void Update()
     {
         

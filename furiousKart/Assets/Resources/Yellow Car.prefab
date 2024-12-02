@@ -979,6 +979,7 @@ GameObject:
   - component: {fileID: 697254390296141141}
   - component: {fileID: 4787164568514644400}
   - component: {fileID: 2576640272805602805}
+  - component: {fileID: 4013015926179149824}
   m_Layer: 0
   m_Name: Yellow Car
   m_TagString: RedCar
@@ -1066,6 +1067,8 @@ MonoBehaviour:
   brakeStrength: 500
   slipAngle: 0
   movingDirection: 0
+  nextCheckpoint: 0
+  currentLap: 0
   steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -1160,6 +1163,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &4013015926179149824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603462218534005980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6285e3c64bd67458c85fe87800c20b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carController: {fileID: 5578552427855198292}
 --- !u!1 &7952497345959730357
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour
     public WheelSmoke wheelSmoke;
     public GameObject SmokePrefab;
 
-    //Two float variables to hold keyboard input values between -1 and 1
+    //Three float variables to hold keyboard input values between -1 and 1
     public float throttleInput;
     public float steeringInput;
     public float brakeInput;
@@ -45,6 +45,12 @@ public class CarController : MonoBehaviour
     WheelFrictionCurve wfcRearF = new WheelFrictionCurve();
     WheelFrictionCurve wfcFrontF = new WheelFrictionCurve();
     WheelFrictionCurve wfcFrontS = new WheelFrictionCurve();
+
+
+
+    // checkpoint variables
+    public int nextCheckpoint;
+    public int currentLap; 
 
    
 
@@ -153,7 +159,7 @@ public class CarController : MonoBehaviour
         //Debug.Log("speed: "+speed + " MD "+movingDirection+ " Current " + Time.frameCount + " until " + nextFrameComparison);
         //Debug.Log(transform.forward + " " + movingDirection);
 
-        CheckInput();
+        checkInput();
         applyPower();
         applySteering();
         applyBrake();
@@ -165,7 +171,7 @@ public class CarController : MonoBehaviour
     }
 
 
-    void CheckInput()   
+    void checkInput()   
     {
         //checks for keyboard inputs between -1 and 1
         throttleInput = Input.GetAxis("Vertical"); // checks W and S or Up arrow and Down arrow
@@ -190,10 +196,11 @@ public class CarController : MonoBehaviour
         rigidbody is facing and so its movng backward.
         **/
         movingDirection = Vector3.Dot(transform.forward, rb.velocity);
-        
+       
+
 
         //Braking checks
-        if(movingDirection<-0.5f && throttleInput > 0) //If movingDirection is negative (moving backward) & a positive throttle input is detected
+        if (movingDirection<-0.5f && throttleInput > 0) //If movingDirection is negative (moving backward) & a positive throttle input is detected
         {
             //The scalar value for throttle input is set equal to the brake input
             //So when moving backward, 'W' a positive throttle input, acts as the brake and will slow the vehicle down
@@ -385,7 +392,30 @@ public class CarController : MonoBehaviour
     }
 
 
+    public void checkPointHit(int checkPointNumber) // takes an integer parameter as the checkPointNumber
+    {
+        Debug.Log(checkPointNumber);
+
+        if(checkPointNumber == nextCheckpoint) // checking whether next checkpoint is the expected one
+        {
+            nextCheckpoint++; // increment nextCheckpoint
+
+            if(nextCheckpoint == checkpointManager.instance.checkPointArray.Length) // checking if the next checkpoint is the end.
+            {
+                nextCheckpoint = 0; // reset nextCheckpoint therefore lap completed
+                currentLap++; // Lap incremented as all checkpoints have been hit.
+                Debug.Log("lapNumber: " + currentLap);
+            }
+
+        }
+    }
+
 }
+
+
+
+
+
 
 //class to hold wheels, serializable field to make it editble in unity.
 [System.Serializable]

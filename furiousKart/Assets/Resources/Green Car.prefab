@@ -466,6 +466,8 @@ GameObject:
   - component: {fileID: 8141847398353552377}
   - component: {fileID: 3957506608359704940}
   - component: {fileID: 9102451290811703680}
+  - component: {fileID: 5796589178615621369}
+  - component: {fileID: -7532042222127478406}
   m_Layer: 0
   m_Name: Green Car
   m_TagString: GreenCar
@@ -553,6 +555,8 @@ MonoBehaviour:
   brakeStrength: 500
   slipAngle: 0
   movingDirection: 0
+  nextCheckpoint: 0
+  currentLap: 0
   steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -631,6 +635,35 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &5796589178615621369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495912473202610650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6285e3c64bd67458c85fe87800c20b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carController: {fileID: 5550189052452782115}
+--- !u!114 &-7532042222127478406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3495912473202610650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4015232558446855887
 GameObject:
   m_ObjectHideFlags: 0
