@@ -5,7 +5,11 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEditor;
 using UnityEngine;
 
-public class CarController : MonoBehaviour
+using Photon.Realtime;
+using Photon.Pun;
+using Unity.VisualScripting;
+
+public class CarController : MonoBehaviourPunCallbacks
 {
 
     //time shite
@@ -63,7 +67,9 @@ public class CarController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        InstantiateSmoke();
+        //InstantiateSmoke();
+
+        photonView.RPC("syncSmoke", RpcTarget.All,gameObject.GetComponent<PhotonView>().ViewID);
 
         InstantiateWheelValues();
 
@@ -71,6 +77,15 @@ public class CarController : MonoBehaviour
     }
 
 
+
+
+    [PunRPC]
+    void syncSmoke(int id)
+    {
+        CarController kartController = PhotonView.Find(id).gameObject.GetComponent<CarController>();
+
+        kartController.InstantiateSmoke();
+    }
     void InstantiateSmoke()
     {
         wheelSmoke.FRwheel = Instantiate(SmokePrefab, colliders.FRwheel.transform.position, Quaternion.identity, colliders.FRwheel.transform)

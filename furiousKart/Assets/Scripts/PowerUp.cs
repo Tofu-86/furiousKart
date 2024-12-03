@@ -46,6 +46,7 @@ public class PowerUp : MonoBehaviour
         Instantiate(afterEffect, transform.position, transform.rotation); // creating a copy of the gameobject afterEffect at the position and rotation of the powerup
 
         GameObject.FindGameObjectWithTag("GreenCar").GetComponent<CarController>().engineStrength *= multiplier;
+        //player.GetComponent<CarController>().engineStrength *= multiplier;
         // note to self, apply collider onto parent car itself.
 
         //playerCar.GetComponent<CarController>().engineStrength *= multiplier;

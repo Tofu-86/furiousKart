@@ -391,6 +391,7 @@
 "Assets/Scripts/checkpointManager.cs"
 "Assets/Scripts/checkpoints.cs"
 "Assets/Scripts/chooseCar.cs"
+"Assets/Scripts/CurrentLapCount.cs"
 "Assets/Scripts/gameManager.cs"
 "Assets/Scripts/PowerUp.cs"
 "Assets/Scripts/SpawnCars.cs"

@@ -543,7 +543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.1, y: 42.2}
+  m_AnchoredPosition: {x: -255, y: 10}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &722838545
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.6753907, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.6753907, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -855,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &946260823
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1834,6 +1834,7 @@ GameObject:
   - component: {fileID: 1785827757}
   - component: {fileID: 1785827756}
   - component: {fileID: 1785827755}
+  - component: {fileID: 1785827758}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1858,8 +1859,8 @@ Camera:
   m_GameObject: {fileID: 1785827754}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.19215688, g: 0.4745098, b: 0.39083022, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1908,13 +1909,30 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785827754}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.24945262, y: -0, z: -0, w: 0.96838707}
+  m_LocalPosition: {x: 175.4, y: 283.06, z: 679}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 28.89, y: 0, z: 0}
+--- !u!114 &1785827758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785827754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa7b503b52008147b53dddcd5735499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  karts:
+  - {fileID: 1851563367}
+  - {fileID: 557184685}
+  - {fileID: 1376762021}
+  cameraSpeed: 0.07
 --- !u!1 &1786169492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,7 +1950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1786169493
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3810,6 +3828,6 @@ SceneRoots:
   - {fileID: 950654460}
   - {fileID: 1373096808}
   - {fileID: 946260825}
-  - {fileID: 557184689}
   - {fileID: 1851563371}
+  - {fileID: 557184689}
   - {fileID: 1376762025}

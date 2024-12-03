@@ -20,7 +20,7 @@ public class SpawnCars : MonoBehaviourPunCallbacks
     public GameObject startRace;
 
     int playerKart;
-    public float waitSec = 5f;
+    public float waitSec = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,17 +38,18 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
         StartCoroutine(delayInstantiation(startPos, startRot));
 
-        if (PhotonNetwork.IsMasterClient)
+       /* if (PhotonNetwork.IsMasterClient)
         {
 
-            //StartCoroutine(delayInstantiation(startPos, startRot));
+            StartCoroutine(delayInstantiation(startPos, startRot));
             //pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
         }
         else
         {
+            StartCoroutine(delayInstantiation(startPos, startRot));
             //pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
         }
-        
+        */
 
         /*
         startRace.SetActive(false);
@@ -86,9 +87,9 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
         }
 */
-        Camera kartCamera = pKart.GetComponentInChildren<Camera>();
-        pKart.GetComponent<CarController>().enabled = true;
-        pKart.GetComponentInChildren<Camera>().enabled = true;
+        //Camera kartCamera = pKart.GetComponentInChildren<Camera>();
+        //pKart.GetComponent<CarController>().enabled = true;
+        //pKart.GetComponentInChildren<Camera>().enabled = true;
         //kartCamera.GetComponent<CameraController>().enabled = true;
 
 
@@ -117,7 +118,7 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(waitSec);
         pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
-        pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+       // pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
         Camera kartCamera = pKart.GetComponentInChildren<Camera>();
         pKart.GetComponent<CarController>().enabled = true;
         pKart.GetComponentInChildren<Camera>().enabled = true;

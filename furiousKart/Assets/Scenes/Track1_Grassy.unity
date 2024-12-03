@@ -8511,7 +8511,7 @@ Transform:
   m_GameObject: {fileID: 1371569004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.8890171, z: 0, w: 0.45787397}
-  m_LocalPosition: {x: 33.5, y: 0, z: -9.7}
+  m_LocalPosition: {x: 41.9, y: 0, z: 2.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10113,6 +10113,7 @@ MonoBehaviour:
   - {fileID: 1241515125}
   - {fileID: 20123817}
   startRace: {fileID: 1275089514}
+  waitSec: 0.5
 --- !u!4 &1631211485
 Transform:
   m_ObjectHideFlags: 0
