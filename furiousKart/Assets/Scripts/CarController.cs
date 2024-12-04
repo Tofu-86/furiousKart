@@ -8,6 +8,9 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 using Unity.VisualScripting;
+using System;
+
+
 
 public class CarController : MonoBehaviourPunCallbacks
 {
@@ -54,9 +57,12 @@ public class CarController : MonoBehaviourPunCallbacks
 
     // checkpoint variables
     public int nextCheckpoint;
-    public int currentLap; 
+    public int currentLap;
 
-   
+    public canvasManager canvasScreen;  // reference to canvas
+
+    public float currentLapTime;
+    public float bestLapTime;
 
 
     //Animation curve to change the steering sensitivity based on speed to allow for smoother wheel movements.
@@ -163,84 +169,95 @@ public class CarController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (!SpawnCars.instance.disableCarMovement) // If the startingRace is false, meaning the race has started, the cars are allowed to drive.
+        {
 
-        //Debug.Log(movingDirection);
+        
+
+            currentLapTime += Time.deltaTime; // every frame call, time will go up. 
 
 
-        speed = rb.velocity.magnitude;
+            var timeSpan = System.TimeSpan.FromSeconds(currentLapTime); // converts currentLapTime to timespan
+            canvasScreen.currentLapTimeText.text = string.Format("{0:00}m{1:00}.{2:000}s", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds); // formatting time and setting it on the canvas
 
-        Vector3 velocityV = rb.velocity;
+    
+        
 
-        //Debug.Log("speed: "+speed + " MD "+movingDirection+ " Current " + Time.frameCount + " until " + nextFrameComparison);
-        //Debug.Log(transform.forward + " " + movingDirection);
 
-        checkInput();
-        applyPower();
-        applySteering();
-        applyBrake();
-        CheckParticles();
-        UpdateWheelPos();
-        bannanaCount();
+
+
+            speed = rb.velocity.magnitude;
+
+            Vector3 velocityV = rb.velocity;
+
+            checkInput();
+            applyPower();
+            applySteering();
+            applyBrake();
+            CheckParticles();
+            UpdateWheelPos();
+            bannanaCount();
 
        
-    }
+        }
 
 
-    void checkInput()   
-    {
-        //checks for keyboard inputs between -1 and 1
-        throttleInput = Input.GetAxis("Vertical"); // checks W and S or Up arrow and Down arrow
-        steeringInput = Input.GetAxis("Horizontal");// checks A or D or right arrow and left arrow
-
-
-
-        //Drift angle stuff
-        slipAngle = Vector3.Angle(transform.forward, rb.velocity-transform.forward);
-
-
-
-
-        /**Vector3.dot calcultes the product of two vectors;
-        in this case it takes transform.forward, the dirction the object is facing
-        and rb.velocity, representing the speed and dirction of the rigidbody's movement
-        By calculating the product, it tells us how the velocity -
-        is aligned to the dirction of the rigid body
-        If movingDirection is positive, we know the object moves in same-
-        direction that the rigidbody is facing
-        If negative, we know its going against the way the-
-        rigidbody is facing and so its movng backward.
-        **/
-        movingDirection = Vector3.Dot(transform.forward, rb.velocity);
-       
-
-
-        //Braking checks
-        if (movingDirection<-0.5f && throttleInput > 0) //If movingDirection is negative (moving backward) & a positive throttle input is detected
+        void checkInput()
         {
-            //The scalar value for throttle input is set equal to the brake input
-            //So when moving backward, 'W' a positive throttle input, acts as the brake and will slow the vehicle down
-            brakeInput = Mathf.Abs(throttleInput);                                                
-        }
-        else if (movingDirection > 0.5f && throttleInput < 0) //If moving forward and a negative throttle input is detected
-        {
+            //checks for keyboard inputs between -1 and 1
+            throttleInput = Input.GetAxis("Vertical"); // checks W and S or Up arrow and Down arrow
+            steeringInput = Input.GetAxis("Horizontal");// checks A or D or right arrow and left arrow
 
-            //the scalar value of throttle input is set to equal break input
-            //so when moving forward, 'S' a negative throttle input (or reverse) acts as a brake and will slow the vehicle down.
-            brakeInput = Mathf.Abs(throttleInput);
-        }
-        else
-        {
-            //If neither of the above cases are met, no braking should occur and so brakeInput value is reset to 0.
-            //as this code runs in update, it will be checking every frame.
-            brakeInput = 0;
-        }
 
-        if (throttleInput < -0.1) {
 
-            bannanaSlip();
-            
+            //Drift angle stuff
+            slipAngle = Vector3.Angle(transform.forward, rb.velocity - transform.forward);
+
+
+
+
+            /**Vector3.dot calcultes the product of two vectors;
+            in this case it takes transform.forward, the dirction the object is facing
+            and rb.velocity, representing the speed and dirction of the rigidbody's movement
+            By calculating the product, it tells us how the velocity -
+            is aligned to the dirction of the rigid body
+            If movingDirection is positive, we know the object moves in same-
+            direction that the rigidbody is facing
+            If negative, we know its going against the way the-
+            rigidbody is facing and so its movng backward.
+            **/
+            movingDirection = Vector3.Dot(transform.forward, rb.velocity);
+
+
+
+            //Braking checks
+            if (movingDirection < -0.5f && throttleInput > 0) //If movingDirection is negative (moving backward) & a positive throttle input is detected
+            {
+                //The scalar value for throttle input is set equal to the brake input
+                //So when moving backward, 'W' a positive throttle input, acts as the brake and will slow the vehicle down
+                brakeInput = Mathf.Abs(throttleInput);
+            }
+            else if (movingDirection > 0.5f && throttleInput < 0) //If moving forward and a negative throttle input is detected
+            {
+
+                //the scalar value of throttle input is set to equal break input
+                //so when moving forward, 'S' a negative throttle input (or reverse) acts as a brake and will slow the vehicle down.
+                brakeInput = Mathf.Abs(throttleInput);
+            }
+            else
+            {
+                //If neither of the above cases are met, no braking should occur and so brakeInput value is reset to 0.
+                //as this code runs in update, it will be checking every frame.
+                brakeInput = 0;
+            }
+
+            if (throttleInput < -0.1)
+            {
+
+                bannanaSlip();
+
+            }
         }
-
 
     }
 
@@ -418,11 +435,28 @@ public class CarController : MonoBehaviourPunCallbacks
             if(nextCheckpoint == checkpointManager.instance.checkPointArray.Length) // checking if the next checkpoint is the end.
             {
                 nextCheckpoint = 0; // reset nextCheckpoint therefore lap completed
-                currentLap++; // Lap incremented as all checkpoints have been hit.
-                Debug.Log("lapNumber: " + currentLap);
+                lapComplete();
+                 
+               
             }
 
         }
+    }
+
+    public void lapComplete()
+    {
+        currentLap++; // Lap incremented as all checkpoints have been hit.
+
+        if(currentLapTime < bestLapTime || bestLapTime == 0) //  if the lap time is larger than the best time or best time is 0, best time is set equal to the current lap time.
+        {
+            bestLapTime = currentLapTime;
+        }
+        currentLapTime = 0; //  reset to zero as lap has been completed.
+
+        var timeSpan = System.TimeSpan.FromSeconds(bestLapTime); // converts bestLapTime to timespan
+        canvasScreen.bestLapTimeText.text = string.Format("{0:00}m{1:00}.{2:000}s", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds); // formatting time and setting it as bestTime on canvas
+
+        canvasScreen.LapDisplay.text = currentLap + "/" + checkpointManager.instance.totalLapCount; // Changing text on canvas
     }
 
 }

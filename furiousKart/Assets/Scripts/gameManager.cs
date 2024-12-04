@@ -9,7 +9,7 @@ using Photon.Pun;
 
 public class gameManager : MonoBehaviourPunCallbacks
 {
-    byte maxPlayersPerRoom = 4;
+    byte maxPlayersPerRoom = 7;
     bool isConnecting;
     public InputField playerName;
     public Text feedbackText;

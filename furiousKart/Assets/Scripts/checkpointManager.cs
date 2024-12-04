@@ -6,12 +6,16 @@ public class checkpointManager : MonoBehaviour
 {
     public static checkpointManager instance;
 
+    public int totalLapCount = 3; // how many laps there should be.
+
     private void Awake() // happens before start function. 
     {
         instance = this; // refers to object in scene.
     }
 
     public checkpoints[] checkPointArray; // Check point array with all checkpoints.
+
+    
 
 
     // Start is called before the first frame update

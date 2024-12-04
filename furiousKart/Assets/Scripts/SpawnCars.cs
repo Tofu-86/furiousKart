@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Photon.Realtime;
-using Photon.Pun; 
+using Photon.Pun;
+using JetBrains.Annotations;
 
 
 
 
 public class SpawnCars : MonoBehaviourPunCallbacks
 {
+
+    public static SpawnCars instance; // accessable from anywhere.
+
+
+
+    private void Awake() // happens before start function. 
+    {
+        instance = this; // refers to object in scene.
+    }
+
     public GameObject[] vehicleFabs; // creating an array for the kart prefabs
     public Transform[] spawnPoint; // creating an array for the spawn points
 
@@ -17,10 +28,21 @@ public class SpawnCars : MonoBehaviourPunCallbacks
     
     GameObject pKart = null;
 
-    public GameObject startRace;
+    public GameObject startRace; // reference to button. 
 
     int playerKart;
     public float waitSec = 0.5f;
+
+
+
+    public bool startingRace; // boolean value if the race is starting.
+    public float counterTime = 1f; // time between counts.
+    private float startCounter; // starting count value; 
+    public int countDown = 5; // how many counts there are.
+
+    public bool disableCarMovement; // so cars cannot move before countDown is completed.
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,86 +54,27 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
 
 
-        
+
         startPos = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
         startRot = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation;
 
         StartCoroutine(delayInstantiation(startPos, startRot));
-
-       /* if (PhotonNetwork.IsMasterClient)
+        disableCarMovement = true; // car movement is disabled on start.
+        startRace.SetActive(false); // disable button for everyone.
+        if (PhotonNetwork.IsConnected)
         {
-
-            StartCoroutine(delayInstantiation(startPos, startRot));
-            //pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+            if (PhotonNetwork.IsMasterClient) 
+            {
+                startRace.SetActive(true); // button is enabled for the host. 
+            }
         }
         else
         {
-            StartCoroutine(delayInstantiation(startPos, startRot));
-            //pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
+            startGame();
         }
-        */
-
-        /*
-        startRace.SetActive(false);
-
-        if (PhotonNetwork.IsConnected)
-        {
-            startPos = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
-            startRot = spawnPoint[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation;
-
-
-
-
-            if (NetworkedPlayer.LocalPlayerInstance == null)
-            {
-                pKart = PhotonNetwork.Instantiate(vehicleFabs[playerKart].name, startPos, startRot, 0);
-                //NetworkedPlayer.LocalPlayerInstance = pKart;
-
-            }
-
-
-            if (PhotonNetwork.IsMasterClient)
-            {
-                startRace.SetActive(true);
-            }
-        }
-        */
-
-        //}
-/*        else
-        {
-            pKart = Instantiate(vehicleFabs[playerKart]);
-            pKart.transform.position = startPos;
-            pKart.transform.rotation = startRot;
-
-
-        }
-*/
-        //Camera kartCamera = pKart.GetComponentInChildren<Camera>();
-        //pKart.GetComponent<CarController>().enabled = true;
-        //pKart.GetComponentInChildren<Camera>().enabled = true;
-        //kartCamera.GetComponent<CameraController>().enabled = true;
-
-
-
-        /*
-
-        foreach (Transform t in spawnPoint) /* going through each spawn point in the array
-                                           * t gives the spawn points transform
-                                           * which allows us to set it equal to the vehicle
-                                           * spawned in later*/
-        /*
-          {
-              if(t == spawnPoint[randomStartPos]) continue;
-              GameObject kart = Instantiate(vehicleFabs[Random.Range(0, vehicleFabs.Length)]); 
-              //instantiating (creating a clone) random kart prefab to use
-              kart.transform.position = t.position; // Setting clones position and rotation to match
-              kart.transform.rotation = t.rotation; // position and rotation of spawnpoint.
-          } */
-
 
     }
-    // Update is called once per frame
+  
 
     IEnumerator delayInstantiation(Vector3 startPos, Quaternion startRot)
     {
@@ -122,6 +85,7 @@ public class SpawnCars : MonoBehaviourPunCallbacks
         Camera kartCamera = pKart.GetComponentInChildren<Camera>();
         pKart.GetComponent<CarController>().enabled = true;
         pKart.GetComponentInChildren<Camera>().enabled = true;
+        pKart.GetComponentInChildren<Canvas>().enabled = true;
 
     }
 
@@ -129,6 +93,57 @@ public class SpawnCars : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        
+        if(startingRace)
+        {
+            startCounter -= Time.deltaTime; // as a second passes
+            if (startCounter <= 0)
+            {
+                countDown--; // taking away one from countdown.
+                startCounter = countDown; // start counter set to the countDown value. 
+
+                UICountdoown.instance.countDownText.text = countDown.ToString(); // setting the UI countdown equal to the countDown value currently.
+
+
+                if (countDown == 0)
+                {
+                    UICountdoown.instance.countDownText.text = "GO!";
+                    startingRace = false; // As the countDown is now 0, the race starts. 
+                    disableCarMovement = false; // car movement enabled.
+                    StartCoroutine(delayGoText());
+                    
+                }
+            }
+
+
+
+        }
+
+
+
+    }
+
+    public void BeginGame()
+    {
+        if(PhotonNetwork.IsMasterClient) // checks if its the host.
+        {
+            photonView.RPC("startGame", RpcTarget.All, null); // runs it on all connected clients
+        }
+    }
+
+
+    [PunRPC]
+    public void startGame()
+    {
+        startingRace = true; // countdown starts. 
+        startCounter = counterTime; // start value set.
+        startRace.SetActive(false); // Disable button once pressed.
+        UICountdoown.instance.countDownText.text = countDown.ToString(); // setting the UI countdown equal to the countDown value currently.
+
+    }
+
+    IEnumerator delayGoText()
+    {
+        yield return new WaitForSeconds(1f); // waits one second before removing the go message.
+        UICountdoown.instance.countDownText.text = "";
     }
 }

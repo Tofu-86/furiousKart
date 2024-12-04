@@ -3,16 +3,17 @@ ScriptsOnlyBuild:
     Assembly-CSharp:
     - CameraController
     - CarController
-    - CurrentLapCount
     - NetworkedPlayer
+    - canvasManager
     - checkPointChecker
     Assembly-CSharp.dll:
     - CameraController
     - CarController
-    - CurrentLapCount
     - NetworkedPlayer
     - PowerUp
     - SpawnCars
+    - UICountdoown
+    - canvasManager
     - carSpin
     - checkPointChecker
     - checkpointManager
@@ -35,6 +36,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonRigidbodyView
     - Photon.Pun.PhotonTransformView
@@ -131,6 +134,9 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: gameManager
     methodName: ConnectSingle
+  - assembly: Assembly-CSharp
+    fullTypeName: SpawnCars
+    methodName: BeginGame
   sceneClasses:
     Assets/Scenes/Singleplay.unity:
     - Class: 1
@@ -221,9 +227,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1624}
     - Class: 114
-      Script: {instanceID: 1626}
-    - Class: 114
-      Script: {instanceID: 1632}
+      Script: {instanceID: 1628}
     - Class: 114
       Script: {instanceID: 1680}
     - Class: 114
@@ -249,8 +253,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6214}
     - Class: 114
-      Script: {instanceID: 6428}
-    - Class: 114
       Script: {instanceID: 6440}
     - Class: 114
       Script: {instanceID: 6548}
@@ -260,6 +262,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 7698}
     - Class: 114
       Script: {instanceID: 8064}
+    - Class: 114
+      Script: {instanceID: 56182}
+    - Class: 114
+      Script: {instanceID: 175768}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -332,7 +338,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1626}
     - Class: 114
-      Script: {instanceID: 1632}
+      Script: {instanceID: 1628}
     - Class: 114
       Script: {instanceID: 1680}
     - Class: 114
@@ -382,8 +388,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6214}
     - Class: 114
-      Script: {instanceID: 6428}
-    - Class: 114
       Script: {instanceID: 6440}
     - Class: 114
       Script: {instanceID: 6528}
@@ -403,6 +407,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8190}
     - Class: 114
       Script: {instanceID: 8492}
+    - Class: 114
+      Script: {instanceID: 56182}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -438,6 +444,12 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
+      Hash: 540882762544409cc4530e60db00e951
+    assemblyName: UnityEngine.UI
+    namespaceName: UnityEngine.UI
+    className: CanvasScaler
+  - hash:
+      serializedVersion: 2
       Hash: b5007673bbbdb9d12597a1d8201370f5
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
@@ -460,12 +472,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI
     namespaceName: UnityEngine.UI
     className: HorizontalLayoutGroup
-  - hash:
-      serializedVersion: 2
-      Hash: 540882762544409cc4530e60db00e951
-    assemblyName: UnityEngine.UI
-    namespaceName: UnityEngine.UI
-    className: CanvasScaler
   - hash:
       serializedVersion: 2
       Hash: e5ced545fd8a42a1f50e04211216ab80
@@ -558,7 +564,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: a454b50917ed3a37db3b89b89158848d
+      Hash: 4a64a9e631ff4d8aedf2650fec85e65b
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: CarController
@@ -708,7 +714,7 @@ ScriptsOnlyBuild:
     className: PlayerNumbering
   - hash:
       serializedVersion: 2
-      Hash: c0984571ebec947843f2a002b4bd7ff5
+      Hash: d4a22ea17cf4458ee64ccc680fb9d602
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: SpawnCars
@@ -2070,7 +2076,7 @@ ScriptsOnlyBuild:
     className: LobbyMainPanel
   - hash:
       serializedVersion: 2
-      Hash: c748bba65bc016e11d06f330c336f58e
+      Hash: a93ea14c56a44aa7ba0d05f35bf7e557
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: checkpointManager
@@ -2362,9 +2368,21 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 9aad98220ed7283947113a6d4abba013
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: canvasManager
+  - hash:
+      serializedVersion: 2
+      Hash: 239131677d00377134f2bfb4eeba8775
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: UICountdoown
   platform: 19
   scenePathNames:
   - Assets/Scenes/start.unity
   - Assets/Scenes/Track1_Grassy.unity
   - Assets/Scenes/Singleplay.unity
-  playerPath: C:/Users/akash/Desktop/furiousKart version 1234567890/FuriousKart.exe
+  playerPath: C:/Users/akash/Desktop/KartFinalProjectV2Package/FuriousKart.exe
